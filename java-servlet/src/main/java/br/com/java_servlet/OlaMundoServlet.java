@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/** Adicionado um mapeamento para o servlet ser acessado via browser,no caso mapeamos para ola**/
 @WebServlet(urlPatterns = "/ola")
 
 /** Adicionado extensão HttpServlet para informar que a classe é um servlet **/
