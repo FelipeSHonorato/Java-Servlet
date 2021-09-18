@@ -16,14 +16,21 @@ import javax.servlet.http.HttpServletResponse;
 public class NovaEmpresaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/** Sobrescrevendo método do HttpServlet para aceitar somente informações via POST **/
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("Cadastrando nova empresa");
 
 		/** REQUEST - Captando informações do browser**/
 		/** Através do request podemos receber informações através do browser**/ 
 		String nomeEmpresa = request.getParameter("nome");
-	
+		Empresa empresa = new Empresa();
+		empresa.setNome(nomeEmpresa);
+		
+		
+		/** Simulamos um banco de dados para captar todas as entradas do browser **/
+		Banco banco = new Banco();
+		banco.adiciona(empresa);
 		
 		
 		/** RESPONSE - Respondendo browser **/
