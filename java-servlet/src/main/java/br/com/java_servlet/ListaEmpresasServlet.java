@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +20,11 @@ public class ListaEmpresasServlet extends HttpServlet {
 		
 		Banco banco = new Banco();
 		List<Empresa> lista = banco.getEmpresas();
+		
+		/**Adicionando ao dispatcher para receber no listaEmpresas.jsp**/
+		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas.jsp");
+		request.setAttribute("empresas", lista);
+		rd.forward(request, response);
 		
 		PrintWriter out = response.getWriter();
 		out.println("<html> <body> <ul>");

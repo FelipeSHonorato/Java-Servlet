@@ -3,6 +3,7 @@ package br.com.java_servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,9 +34,16 @@ public class NovaEmpresaServlet extends HttpServlet {
 		banco.adiciona(empresa);
 		
 		
+		/**Chamando o JSP para responder ao browser**/
+		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresaCriada.jsp");
+		/**Adicionando ao dispatcher o valor de nome da empresa para receber no JSP**/
+		request.setAttribute("empresa", empresa.getNome());
+		rd.forward(request, response);
+		
+		
 		/** RESPONSE - Respondendo browser **/
-		PrintWriter out = response.getWriter();
-		out.println("<html> <body> Empresa " + nomeEmpresa + " cadastrada com sucesso! </body> </html>");
+//		PrintWriter out = response.getWriter();
+//		out.println("<html> <body> Empresa " + nomeEmpresa + " cadastrada com sucesso! </body> </html>");
 		
 	}
 
