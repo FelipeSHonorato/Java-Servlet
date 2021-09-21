@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-    <!-- Fazendo o import de Empresa e Classe List -->
-    <%@
-    
-    page import= "java.util.List, br.com.java_servlet.Empresa"
-    
-    %>
+   
+<%@ page import= "java.util.List, br.com.java_servlet.Empresa" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <!DOCTYPE html>
@@ -16,21 +13,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Lista de Empresas:
-	<br>
+	Lista de Empresas:<br>
+	
 	<ul>
 	
-	<% 
-	List<Empresa> lista = (List<Empresa>)request.getAttribute("empresas");
-	for (Empresa empresa : lista){ 
-	%>
+	<c:forEach items="${empresas}" var="empresa">
+		
+		<li>${ empresa.nome }</li>
 	
-	<li><%= empresa.getNome() %></li>
+	</c:forEach>
 	
-	<%
-	} 
-	%>
-
 	</ul>
 
 </body>
