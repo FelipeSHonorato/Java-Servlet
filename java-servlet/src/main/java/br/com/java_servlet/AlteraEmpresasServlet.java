@@ -5,30 +5,29 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class NovaEmpresaServlet
- */
-@WebServlet("/novaEmpresa")
-public class NovaEmpresaServlet extends HttpServlet {
-	
+
+@WebServlet("/alteraEmpresa")
+public class AlteraEmpresasServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	
-	/** Sobrescrevendo método doPost para aceitar somente informações via POST **/
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		System.out.println("Cadastrando nova empresa");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println("Alterando nova empresa");
 
 		/** REQUEST - Captando informações do browser**/
 		/** Através do request podemos receber informações através do browser**/ 
 		String nomeEmpresa = request.getParameter("nome");
 		String paramDataEmpresa = request.getParameter("data");
+		String paramId = request.getParameter("id");
+		
+		Integer id = Integer.valueOf(paramId);
 		
 		Date dataAbertura = null;
 		try {
@@ -38,22 +37,13 @@ public class NovaEmpresaServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 		
-		Empresa empresa = new Empresa();
+		Banco banco = new Banco();
+		Empresa empresa = banco.buscaEmpresaId(id);
 		empresa.setNome(nomeEmpresa);
 		empresa.setDataAbertura(dataAbertura);
 		
-		/** Simulamos um banco de dados para captar todas as entradas do browser **/
-		Banco banco = new Banco();
-		banco.adiciona(empresa);
-		
-		request.setAttribute("empresa", empresa.getNome());
-		
-		response.sendRedirect("/java-servlet/listaEmpresas");
-		
-		/**Chamando o JSP para responder ao browser**/
-//		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas");
-//		
-//		rd.forward(request, response);
+		response.sendRedirect("listaEmpresas");
+				
 	}
 
 }
