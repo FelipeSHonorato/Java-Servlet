@@ -1,4 +1,4 @@
-package br.com.java_servlet;
+package br.com.java_servlet.modelo;
 
 import java.util.Date;
 

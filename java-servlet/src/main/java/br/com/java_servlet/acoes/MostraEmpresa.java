@@ -1,26 +1,24 @@
-package br.com.java_servlet;
+package br.com.java_servlet.acoes;
 
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.java_servlet.modelo.Banco;
+import br.com.java_servlet.modelo.Empresa;
 
-@WebServlet("/mostraEmpresa")
-public class MostraEmpresaServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class MostraEmpresa {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void executa(HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+	
+		System.out.println("mostrando empresa");
 		
 		String paramId = request.getParameter("id");
-		
-		//Efetuando um parse para modificar o tipo do valor id de String para Integer
+	
 		Integer id = Integer.valueOf(paramId);
-		
 		
 		Banco banco = new Banco();
 		Empresa empresa = banco.buscaEmpresaId(id);
@@ -30,6 +28,6 @@ public class MostraEmpresaServlet extends HttpServlet {
 		request.setAttribute("empresa", empresa);
 		RequestDispatcher rd = request.getRequestDispatcher("/formAlteraEmpresa.jsp");
 		rd.forward(request, response);
+		
 	}
-
 }
