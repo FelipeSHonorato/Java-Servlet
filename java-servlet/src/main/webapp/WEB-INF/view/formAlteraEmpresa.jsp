@@ -12,6 +12,7 @@
 </head>
 <body>
 
+	<c:import url="logout-parcial.jsp"/>
 	<!--  Utilizado formulário para captar campo para servlet novaEmpresa -->
 	<!--  Foi utilizado método POST para que a informação não fique na URL -->
 
